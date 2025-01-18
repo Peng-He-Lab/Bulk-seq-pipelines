@@ -14,9 +14,11 @@ if [[ "$1" == "PE" ]]
         printf "mkdir -p "$2"FastQCk6/Multi && " >> testcode
         printf "/woldlab/castor/proj/programs/FastQC-0.11.3/fastqc "$2"R1all.fastq -o "$2"FastQCk6R1 -k 6 && " >> testcode
         printf "/woldlab/castor/proj/programs/FastQC-0.11.3/fastqc "$2"R2all.fastq -o "$2"FastQCk6R2 -k 6 && " >> testcode
-        printf "~/.local/bin/cutadapt -a CTGTCTCTTATACAC "$2"R1all.fastq | ~/.local/bin/cutadapt -a CGTATGCCGTCTTCTGCTTG - | ~/.local/bin/cutadapt -g TGCCGTCTTCTGCTTG - | ~/.local/bin/cutadapt -g GGTAACTTTGTGTTT - | ~/.local/bin/cutadapt -g CTTTGTGTTTGA - | ~/.local/bin/cutadapt -a CACTCGTCGGCAGCGTTAGATGTGTATAAG - | ~/.local/bin/cutadapt -a GAAGAGCACACGTCTGAACTCC - > "$2"R1allpairedfastq && " >> testcode
-        printf "~/.local/bin/cutadapt -a CTGTCTCTTATACAC "$2"R2all.fastq | ~/.local/bin/cutadapt -a CGTATGCCGTCTTCTGCTTG - | ~/.local/bin/cutadapt -g TGCCGTCTTCTGCTTG - | ~/.local/bin/cutadapt -g GGTAACTTTGTGTTT - | ~/.local/bin/cutadapt -g CTTTGTGTTTGA - | ~/.local/bin/cutadapt -a CACTCGTCGGCAGCGTTAGATGTGTATAAG - > "$2"R2allpairedfastq && " >> testcode
-#        printf "java -jar /woldlab/castor/proj/programs/Trimmomatic-0.33/trimmomatic-0.33.jar PE -threads 4 -trimlog "$2"trimmomatic.log "$2"R1trimmedfastq "$2"R2trimmedfastq "$2"R1allpairedfastq "$2"R1allunpairedfastq "$2"R2allpairedfastq "$2"R2allunpairedfastq ILLUMINACLIP:/woldlab/castor/home/phe/genomes/AllAdaptors.fa:2:30:10 LEADING:3 TRAILING:3 SLIDINGWINDOW:4:15 MINLEN:"$(($3==0?20:$3))" && " >> testcode
+        printf "~/.local/bin/cutadapt -a CTGTCTCTTATACAC "$2"R1all.fastq | ~/.local/bin/cutadapt -a CGTATGCCGTCTTCTGCTTG - | ~/.local/bin/cutadapt -g TGCCGTCTTCTGCTTG - | ~/.local/bin/cutadapt -g GGTAACTTTGTGTTT - | ~/.local/bin/cutadapt -g CTTTGTGTTTGA - | ~/.local/bin/cutadapt -a CACTCGTCGGCAGCGTTAGATGTGTATAAG - | ~/.local/bin/cutadapt -a GAAGAGCACACGTCTGAACTCC - > "$2"R1trimmedfastq && " >> testcode
+        printf "~/.local/bin/cutadapt -a CTGTCTCTTATACAC "$2"R2all.fastq | ~/.local/bin/cutadapt -a CGTATGCCGTCTTCTGCTTG - | ~/.local/bin/cutadapt -g TGCCGTCTTCTGCTTG - | ~/.local/bin/cutadapt -g GGTAACTTTGTGTTT - | ~/.local/bin/cutadapt -g CTTTGTGTTTGA - | ~/.local/bin/cutadapt -a CACTCGTCGGCAGCGTTAGATGTGTATAAG - > "$2"R2trimmedfastq && " >> testcode
+#        printf "~/.local/bin/cutadapt -a CTGTCTCTTATACAC "$2"R1all.fastq | ~/.local/bin/cutadapt -a CGTATGCCGTCTTCTGCTTG - | ~/.local/bin/cutadapt -g TGCCGTCTTCTGCTTG - | ~/.local/bin/cutadapt -g GGTAACTTTGTGTTT - | ~/.local/bin/cutadapt -g CTTTGTGTTTGA - | ~/.local/bin/cutadapt -a CACTCGTCGGCAGCGTTAGATGTGTATAAG - | ~/.local/bin/cutadapt -a GAAGAGCACACGTCTGAACTCC - > "$2"R1allpairedfastq && " >> testcode
+#        printf "~/.local/bin/cutadapt -a CTGTCTCTTATACAC "$2"R2all.fastq | ~/.local/bin/cutadapt -a CGTATGCCGTCTTCTGCTTG - | ~/.local/bin/cutadapt -g TGCCGTCTTCTGCTTG - | ~/.local/bin/cutadapt -g GGTAACTTTGTGTTT - | ~/.local/bin/cutadapt -g CTTTGTGTTTGA - | ~/.local/bin/cutadapt -a CACTCGTCGGCAGCGTTAGATGTGTATAAG - > "$2"R2allpairedfastq && " >> testcode
+        printf "java -jar /woldlab/castor/proj/programs/Trimmomatic-0.33/trimmomatic-0.33.jar PE -threads 4 -trimlog "$2"trimmomatic.log "$2"R1trimmedfastq "$2"R2trimmedfastq "$2"R1allpairedfastq "$2"R1allunpairedfastq "$2"R2allpairedfastq "$2"R2allunpairedfastq ILLUMINACLIP:/woldlab/castor/home/phe/genomes/AllAdaptors.fa:2:30:10 LEADING:3 TRAILING:3 SLIDINGWINDOW:4:15 MINLEN:"$(($3==0?20:$3))" && " >> testcode
         printf "/woldlab/castor/proj/programs/FastQC-0.11.3/fastqc "$2"R1allpairedfastq -o "$2"FastQCk6R1 -k 6 && " >> testcode
         printf "/woldlab/castor/proj/programs/FastQC-0.11.3/fastqc "$2"R2allpairedfastq -o "$2"FastQCk6R2 -k 6 && " >> testcode
         if [[ "$3" == "0" ]]
@@ -36,8 +38,10 @@ if [[ "$1" == "PE" ]]
                     printf "/woldlab/castor/proj/programs/FastQC-0.11.3/fastqc "$2"R2allfastq21_21 -o "$2"FastQCk6R2 -k 6 && " >> testcode
                 fi
         else
-            printf "python2 /woldlab/castor/home/georgi/code/trimfastq.py "$2"R1allpairedfastq "$3" -stdout > "$2"R1allfastq"$3" && " >> testcode
-            printf "python2 /woldlab/castor/home/georgi/code/trimfastq.py "$2"R2allpairedfastq "$3" -stdout > "$2"R2allfastq"$3" && " >> testcode
+ #          printf "python2 /woldlab/castor/home/georgi/code/trimfastq.py "$2"R1allpairedfastq "$3" -stdout > "$2"R1allfastq"$3" && " >> testcode
+ #          printf "python2 /woldlab/castor/home/georgi/code/trimfastq.py "$2"R2allpairedfastq "$3" -stdout > "$2"R2allfastq"$3" && " >> testcode
+            printf "mv "$2"R1allpairedfastq "$2"R1allfastq"$3" && " >> testcode
+            printf "mv "$2"R2allpairedfastq "$2"R2allfastq"$3" && " >> testcode
         fi
 elif [[ "$1" == "SE" ]]
     then
@@ -69,3 +73,4 @@ else
     exit 1
 fi
 printf "rm "$2"*fastq & \n" >> testcode
+
