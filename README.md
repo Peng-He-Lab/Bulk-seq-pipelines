@@ -14,3 +14,20 @@
 ## [4C-seq]()
 
 ## [ChIP-seq for Luo et al.](ChIP-seq.md)
+
+
+# Pipeline modification instructions
+
+<details>
+  <summary><b>&nbsp&nbsp1. Construct bowtie indices</b></summary>
+  
+### 1.1 Open the sequence files using snapgene etc. and save as .fasta (.fa) files
+### 1.2 Copy the .fasta files to `~phe/genomes/YichengVector/`
+### 1.3 Run `/woldlab/castor/proj/genome/programs/bowtie-0.12.7/bowtie-build -f 2kbCirceSDGFPalldel.fa 2kbCirceSDGFPalldel`
+</details>
+
+<details>
+  <summary><b>&nbsp&nbsp2. Add the vectors in the</b></summary>
+  
+###  [RNA bowtie code](BowtieYichengCodeGeneratorRNA.sh) or [smallRNA bowtie code](BowtieYichengCodeGeneratorsmallRNA.sh)
+</details>
